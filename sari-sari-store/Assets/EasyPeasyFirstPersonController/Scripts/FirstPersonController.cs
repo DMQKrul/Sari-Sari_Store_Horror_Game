@@ -28,7 +28,18 @@ namespace EasyPeasyFirstPersonController
         private float currentTilt;
         private float tiltVelocity;
 
-        public PlayerBaseState CurrentState { get => currentState; set => currentState = value; }
+        public PlayerBaseState CurrentState
+        {
+            get => currentState;
+            set
+            {
+                if (currentState != null)
+                    currentState.ExitState();
+                currentState = value;
+                if (currentState != null)
+                    currentState.EnterState();
+            }
+        }
 
         [Header("Visual Settings")]
         public float normalFov = 60f;
